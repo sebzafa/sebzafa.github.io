@@ -201,10 +201,10 @@ export default function ProjectsCarousel() {
   // Smooth idle auto-scroll without CSS animation to avoid stutter on hover
   useEffect(() => {
     let frame: number;
-    const speedPxPerFrame = 0.5; // tune for desired idle speed
+    const speedPxPerFrame = 0.8; // tune for desired idle speed (increased from 0.5)
     const loop = () => {
       const el = scrollContainerRef.current;
-      if (el && !isInteracting && !isDragging) {
+      if (el && !isInteracting) {
         el.scrollLeft += speedPxPerFrame;
         // Loop logic handled by onScroll (handleScroll) already
       }
@@ -212,7 +212,7 @@ export default function ProjectsCarousel() {
     };
     frame = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frame);
-  }, [isInteracting, isDragging]);
+  }, [isInteracting]);
 
   return (
     <div className="projects-carousel mt-12" aria-hidden={false}>
